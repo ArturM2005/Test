@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
 
 class RateController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function rates(?string $currency = null)
+    public function rates()
     {
-
+        $rates = Http::get('https://api.coincap.io/v2/rates');
+        return $rates->json('data');
     }
 
     /**
