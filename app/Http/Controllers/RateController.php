@@ -13,8 +13,8 @@ class RateController extends Controller
      */
     public function rates()
     {
-        $rates = Http::get('https://api.coincap.io/v2/rates');
-        return $rates->json('data');
+        $rates = Http::get('https://api.coincap.io/v2/rates')->json('data');
+        return response()->json($rates, '200');
     }
 
     /**
