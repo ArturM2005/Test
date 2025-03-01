@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -13,8 +14,8 @@ class RateController extends Controller
      */
     public function rates()
     {
-        $rates = Http::get('https://api.coincap.io/v2/rates')->json('data');
-        return response()->json($rates, '200');
+        $rates = Http::get('https://api.coincap.io/v2/rates')->collect();
+        return Rate::index($rates['data']);
     }
 
     /**
